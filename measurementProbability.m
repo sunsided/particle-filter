@@ -1,5 +1,5 @@
 function prob = measurementProbability(p, measurement, landmarks, noiseVariance)
-    % Berechnet die Wahrscheinlichkeitsgewichtungen für die Messungen.
+    % Berechnet die Wahrscheinlichkeitsgewichtungen fÃ¼r die Messungen.
     % Es muss genauso viele Messungen wie Landmarken geben.
 
     x = p(1);

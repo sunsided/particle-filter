@@ -5,13 +5,13 @@ translationNoiseVariance = 0.05;
 rotationNoiseVariance = 0.05;
 measurementNoiseVariance = 5;
 
-% Landmarken für die Messung
+% Landmarken fÃ¼r die Messung
 landmarks = [20, 20; 
             80, 20; 
             20, 80; 
             80, 80];
 
-% Weltgröße
+% WeltgrÃ¶ÃŸe
 worldSize = 100; % quadratisch
 
 % Anzahl der Partikel
@@ -53,6 +53,6 @@ for i=1:100
     % Messungen erzeugen
     w = measurementProbabilities(p, Z, landmarks, measurementNoiseVariance);
     
-    % Messungen resamplen (ziehen mit Zurücklegen mit Wahrscheinlichkeit w)
+    % Messungen resamplen (ziehen mit ZurÃ¼cklegen mit Wahrscheinlichkeit w)
     p = resampleParticles(p, w);
 end

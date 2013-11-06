@@ -1,5 +1,5 @@
 function p = createRandomStates(worldSize, N)
-    % Erzeugt N gleichverteilte Schätzungen für Zustandsverktor
+    % Erzeugt N gleichverteilte SchÃ¤tzungen fÃ¼r Zustandsvektor
     % [x,y,Richtung]
     x = rand(N, 1) * worldSize;
     y = rand(N, 1) * worldSize;

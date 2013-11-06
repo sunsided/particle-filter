@@ -1,11 +1,11 @@
 function resampled = resampleParticles(p, w)
-    % Zieht mit zurücklegen N Elemente gewichtet mit ihrem Faktors w
+    % Zieht mit zurÃ¼cklegen N Elemente gewichtet mit ihrem Faktors w
 
     N = size(p, 1);
     
     maximumW = max(w);
     
-    % Startindex zufällig ziehen
+    % Startindex zuf?llig ziehen
     index = randi(N,1);
     
     % Laufvariable im Verteilungskreis
