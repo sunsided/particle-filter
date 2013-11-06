@@ -45,14 +45,19 @@ for i=1:100
     
     % System bewegen
     robot = move(robot, heading, distance, translationNoiseVariance, rotationNoiseVariance, worldSize);
+
+    % Messungen erzeugen
     Z = senseDistanceFromLandmarks(robot, landmarks, measurementNoiseVariance);
     
-    % Partikel bewegen
+    % Partikel bewegen: Partikel vollziehen Bewegung des Systems nach.
+    % Diese Bewegung wird unter Annahme eines AWGN-Fehlers modelliert.
     p = move(p, heading, distance, translationNoiseVariance, rotationNoiseVariance, worldSize);
     
-    % Messungen erzeugen
+    % Partikel bewerten: Wie wahrscheinlich ist die Korrektheit jedes Partikel bei gegebener Messung
     w = measurementProbabilities(p, Z, landmarks, measurementNoiseVariance);
     
-    % Messungen resamplen (ziehen mit Zurücklegen mit Wahrscheinlichkeit w)
+    % Messungen resamplen (ziehen mit Zurücklegen mit Wahrscheinlichkeit w):
+    % Partikel mit geringerer Wahrscheinlichkeit werden seltener gezogen, wodurch sie gegenüber
+    % Partikeln mit hoher Wahrscheinlichkeit auf Dauer aussterben.
     p = resampleParticles(p, w);
 end
