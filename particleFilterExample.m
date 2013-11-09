@@ -22,15 +22,28 @@ robot = [rand(1)*worldSize, rand(1)*worldSize, rand(1)*2*pi];
 
 % Initiale Partikel erzeugen
 p = createRandomStates(worldSize, N);
+estimated = mean(p);
 
 % Initialer Plot
-fig = figure;
-plot_p = plot(p(:,1), p(:,2), '.'); hold on;
-plot_s = plot(robot(1), robot(2), 'r+');
+fig = figure();
+subplot(1,2,1);
+plot_s = plot(robot(1), robot(2), 'r+'); hold on;
+plot_p = plot(p(:,1), p(:,2), 'b+');
 plot(landmarks(:,1), landmarks(:,2), 'mo');
+legend('Echte Position', 'Partikel', 'Landmarken');
 axis([0 worldSize 0 worldSize]);
+xlabel('x'); ylabel('y');
 axis square;
  
+subplot(1,2,2);
+plot_s2 = plot(robot(1), robot(2), 'r+'); hold on;
+plot_e = plot(estimated(1), estimated(2), 'b+');
+plot(landmarks(:,1), landmarks(:,2), 'mo');
+legend('Echte Position', 'Approximierte Position', 'Landmarken');
+axis([0 worldSize 0 worldSize]);
+xlabel('x'); ylabel('y');
+axis square;
+
 for i=1:100
     % plotten
     figure(fig);
@@ -60,4 +73,14 @@ for i=1:100
     % Partikel mit geringerer Wahrscheinlichkeit werden seltener gezogen, wodurch sie gegen√ºber
     % Partikeln mit hoher Wahrscheinlichkeit auf Dauer aussterben.
     p = resampleParticles(p, w);
+    
+    % Sch‰tzung beziehen
+    estimated = mean(p);
+    
+    % plot 2
+    figure(fig);
+    set(plot_s2, 'XData', [get(plot_s2, 'XData') robot(1)]);
+    set(plot_s2, 'YData', [get(plot_s2, 'YData') robot(2)]);
+    set(plot_e, 'XData', [get(plot_e, 'XData') estimated(1)]);
+    set(plot_e, 'YData', [get(plot_e, 'YData') estimated(2)]);
 end
