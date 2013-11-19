@@ -57,6 +57,15 @@ function [x, y, z] = createEllipsoid(center, radii, rotation, variance, flat)
         end
     end
 
+    % plot the ellipsoid
+    if nargout == 0
+        figure('Name', 'Ellipsoid');
+        surfl(x, y, z);
+        colormap gray;
+        axis equal;
+        xlabel('x'); ylabel('y'); zlabel('z');
+    end
+    
     % flatten array if requested
     if flat
         rows = size(x, 1);
@@ -79,20 +88,5 @@ function [x, y, z] = createEllipsoid(center, radii, rotation, variance, flat)
         x = xout;
         y = yout;
         z = zout;
-        
-        if nargout == 0
-            figure('Name', 'Ellipsoid');
-            plot3(x, y, z, 'Color', [0.4 0.4 0.7]);
-            axis equal;
-            xlabel('x'); ylabel('y'); zlabel('z');
-        end
-    else
-        if nargout == 0
-            figure('Name', 'Ellipsoid');
-            surfl(x, y, z);
-            colormap gray;
-            axis equal;
-            xlabel('x'); ylabel('y'); zlabel('z');
-        end
     end
 end
